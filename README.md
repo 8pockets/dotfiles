@@ -1,4 +1,4 @@
-#welcome to shyamauc dotfiles
+#welcome to 8pockets dotfiles
 
 ##How to
  1. git clone dotfile
