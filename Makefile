@@ -7,6 +7,7 @@ install:
 		ln -snf ~/dotfiles/.bash_profile ~/.bash_profile
 		ln -snf ~/dotfiles/.ctags ~/.ctags
 		ln -snf ~/dotfiles/.tmux.conf ~/.tmux.conf
+		mkdir ~/powerline/
 		ln -snf ~/dotfiles/powerline ~/powerline/
 		mkdir -p ~/.vim/bundle/
 		git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
