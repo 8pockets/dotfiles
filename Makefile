@@ -7,7 +7,10 @@ install:
 		ln -snf ~/dotfiles/.bash_profile ~/.bash_profile
 		ln -snf ~/dotfiles/.ctags ~/.ctags
 		ln -snf ~/dotfiles/.tmux.conf ~/.tmux.conf
-		mkdir ~/powerline/
-		ln -snf ~/dotfiles/powerline ~/powerline/
-		mkdir -p ~/.vim/bundle/
-		git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+		ln -snf ~/dotfiles/.vim/ ~/.vim/
+		mkdir -p ~/.vim/autoload/
+		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		mkdir -p ~/.local/share/fonts
+		cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
+		sudo fc-cache -fv
