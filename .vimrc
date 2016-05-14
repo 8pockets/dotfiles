@@ -95,7 +95,7 @@ Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle'] }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " NerdTree Icon
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 
 Plug 'tomasr/molokai'
 Plug 'tomtom/tcomment_vim'
@@ -111,9 +111,6 @@ Plug 'leshill/vim-json'
 
 " 入力補完
 Plug 'shougo/neocomplete.vim'
-
-" Vim Icon
-Plug 'ryanoasis/vim-devicons'
 
 "Plug 'Shougo/vimproc'
 "Plug 'Shougo/vimfiler'
@@ -138,7 +135,7 @@ filetype plugin indent on    " required
 filetype plugin on
 
 " vim-devicons
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+" set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
 
 "インデントの色設定
 hi IndentGuidesOdd  ctermbg=white
@@ -175,8 +172,8 @@ map <C-e> :NERDTreeToggle<CR>
 
 " ディレクトリ表示記号を変更する
 let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeDirArrowExpandable = '→'
+let g:NERDTreeDirArrowCollapsible = '🍣'
 let g:NERDTreeWinSize = 30
 "隠しファイルを表示する。
 let g:NERDTreeShowHidden = 1
