@@ -3,6 +3,11 @@
 " 基本設定
 "
 "
+" エンコーディング
+set encoding=UTF-8
+set fileencoding=UTF-8
+set termencoding=UTF-8
+
 let mapleader = ','              " キーマップリーダー
 set scrolloff=5                  " スクロール時の余白確保
 set textwidth=0                  " 一行に長い文章を書いていても自動折り返しをしない
@@ -13,6 +18,7 @@ set hidden                       " 編集中でも他のファイルを開ける
 set backspace=indent,eol,start   " バックスペースでなんでも消せるように
 set formatoptions=lmoq           " テキスト整形オプション，マルチバイト系を追加
 set vb t_vb=                     " ビープをならさない
+set novisualbell                 " ビープをならさない
 set browsedir=buffer             " Exploreの初期ディレクトリ
 set whichwrap=b,s,h,l,>,<,],[    " カーソルを行頭、行末で止まらないようにする
 set showcmd                      " コマンドをステータス行に表示
@@ -20,6 +26,7 @@ set showmode                     " 現在のモードを表示
 set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
 set modelines=0                  " モードラインは無効
 set notitle                      " vimを使ってくれてありがとう
+set history=10000                " コマンド・検索パターンの履歴
 
 "ターミナルでマウスを使用できるようにする
 set mouse=a
@@ -41,72 +48,6 @@ set helpfile=$VIMRUNTIME/doc/help.txt
 nnoremap <C-n> gt
 nnoremap <C-p> gT
 
-" ファイルタイプ判定をon
-filetype plugin on
-
-" NeoBundle - Vimプラグイン管理
-" Note: Skip initialization for vim-tiny or vim-small.
- if !1 | finish | endif
-
- if has('vim_starting')
-   if &compatible
-    set nocompatible               " Be iMproved
-   endif
-
-   " Required:
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
- endif
-
- " Required:
- call neobundle#begin(expand('~/.vim/bundle/'))
-
- " Let NeoBundle manage NeoBundle
- NeoBundleFetch 'Shougo/neobundle.vim'
-
- "NeoBundle 'Shougo/unite.vim'
- "NeoBundle 'Shougo/vimproc'
- "NeoBundle 'Shougo/vimfiler'
- NeoBundle 'scrooloose/nerdtree'
- "NeoBundle 'bling/vim-airline'
- NeoBundle 'tomasr/molokai'
-" コメントON/OFFを手軽に実行
- NeoBundle 'tomtom/tcomment_vim'
-" インデントに色を付けて見やすくする
-"NeoBundle 'nathanaelkane/vim-indent-guides'
-" シンタックスチェック
-" NeoBundle 'scrooloose/syntastic'
-" phpcs
-" NeoBundle 'bpearson/vim-phpcs.git'
-
-call neobundle#end()
-
-filetype plugin indent on
-
-NeoBundleCheck
-
-"vimprocを適切に読み込む
-"let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_mac.so'
-"インデントの色設定
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=black
-" vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
-"let g:indent_guides_enable_on_vim_startup = 1
-
-" NERDTree設定
-" いつでも<C-e>で開閉
-  nmap <silent> <C-e>      :NERDTreeToggle<CR>
-  vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
-  omap <silent> <C-e>      :NERDTreeToggle<CR>
-  imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
-  cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
-"隠しファイルを表示する。
-let NERDTreeShowHidden = 1
-let NERDTreeWinSize = 40
-"引数なしで実行したとき、NERDTreeを実行する
-let file_name = expand("")
-if has('vim_starting') &&  file_name == ""
-    autocmd VimEnter * execute 'NERDTree ./'
-endif
 
 " syntastic設定
 " https://github.com/scrooloose/syntastic/blob/master/doc/syntastic.txt
@@ -141,6 +82,123 @@ endif
 "
 "
 "
+" vim-plug - Vimプラグイン管理
+" https://github.com/junegunn/vim-plug
+"
+"
+"
+call plug#begin('~/.vim/plugged')
+
+Plug 'Shougo/unite.vim'
+" NERDTree
+Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle'] }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" NerdTree Icon
+"Plug 'ryanoasis/vim-devicons'
+
+Plug 'tomasr/molokai'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+
+" スニペット
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
+
+" JSONプラグイン
+Plug 'leshill/vim-json'
+
+" 入力補完
+Plug 'shougo/neocomplete.vim'
+
+"Plug 'Shougo/vimproc'
+"Plug 'Shougo/vimfiler'
+"Plug 'bling/vim-airline'
+
+" インデントに色を付けて見やすくする
+Plug 'nathanaelkane/vim-indent-guides'
+
+" シンタックスチェック
+"Plug 'scrooloose/syntastic'
+
+" phpcs
+"Plug 'bpearson/vim-phpcs.git'
+
+" ステータスライン・タブライン
+Plug 'itchyny/lightline.vim'
+
+call plug#end()
+
+" filetype設定
+filetype plugin indent on    " required
+filetype plugin on
+
+" vim-devicons
+" set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+
+"インデントの色設定
+hi IndentGuidesOdd  ctermbg=white
+hi IndentGuidesEven ctermbg=lightgrey
+
+" NERDTree設定
+" いつでも<C-e>で開閉
+"nmap <silent> <C-e>      :NERDTreeToggle<CR>
+"vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+"omap <silent> <C-e>      :NERDTreeToggle<CR>
+"imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+"cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
+map <C-e> :NERDTreeToggle<CR>
+
+" NERDTress File highlighting
+"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+" exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+" exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"endfunction
+"
+"call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+"call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+"call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+" ディレクトリ表示記号を変更する
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '→'
+let g:NERDTreeDirArrowCollapsible = '🍣'
+let g:NERDTreeWinSize = 30
+"隠しファイルを表示する。
+let g:NERDTreeShowHidden = 1
+"引数なしで実行したとき、NERDTreeを実行する
+let file_name = expand("")
+if has('vim_starting') &&  file_name == ""
+    autocmd VimEnter * execute 'NERDTree ./'
+endif
+
+" nerdtree-git-plugin
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+"
+"
+"
 "
 "インデント設定
 "
@@ -150,13 +208,13 @@ endif
 "
 "
 "
-"-------------------------------------------------------------------------------
-" インデント Indent
-"-------------------------------------------------------------------------------
 set autoindent   " 自動でインデント
 set paste        " ペースト時にautoindentを無効に(onにするとautocomplpop.vimが動かない)
-set smartindent  " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする。
 set cindent      " Cプログラムファイルの自動インデントを始める
+set expandtab    " タブ入力を複数の空白入力に置き換え
+set smarttab     " 行頭の余白内で Tab を打ち込むとshiftwidthの数だけインデントする
+set smartindent  " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする。
+
 
 " softtabstopはTabキー押し下げ時の挿入される空白の量，0の場合はtabstopと同じ，BSにも影響する
 set tabstop=2 shiftwidth=2 softtabstop=0
@@ -250,17 +308,20 @@ hi PmenuSel cterm=reverse ctermfg=33 ctermbg=222 gui=reverse guifg=#3399ff guibg
 "
 "
 "
-"表示サポート
+" 表示サポート
 "
 "
 "
 "
 
+set title
+set undolevels=300    " タイトルをウィンドウ枠に表示
 set showmatch         " 括弧の対応をハイライト
 set number            " 行番号表示
 set list              " 不可視文字表示
-set listchars=tab:>.,trail:_,extends:>,precedes:< " 不可視文字の表示形式
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:% "不可視文字の表示形式
 set display=uhex      " 印字不可能文字を16進数で表示
+set ruler             " 右下に表示される行・列の番号を表示する
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
@@ -293,6 +354,7 @@ nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 "
 "
 "
+set infercase           " 補完の際の大文字小文字の区別しない
 set ignorecase          " 大文字小文字を区別しない
 set smartcase           " 検索文字に大文字がある場合は大文字小文字を区別
 set incsearch           " インクリメンタルサーチ
@@ -310,3 +372,4 @@ set noshowmode
 " ctag設定
 " v → Ctrl + ]で垂直分割して開く
 map v<C-]> :vsp <CR>:exec("tjump ".expand('<cword>'))<CR>
+

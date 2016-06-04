@@ -198,7 +198,7 @@ zstyle ':completion:*' list-colors "${LS_COLORS}"
 # alias
 alias vi='vim' # vi で vim 起動
 alias rm='rm -i'
-alias gd='git diff'
+alias gd='git diff --color'
 alias gdc='git diff --cached'
 alias gs='git status'
 alias gb='git branch'
