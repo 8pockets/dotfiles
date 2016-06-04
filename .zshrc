@@ -202,6 +202,6 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gs='git status'
 alias gb='git branch'
-alias access='tail -f /home/y/logs/yapache/access'
-alias error='tail -f /home/y/logs/yapache/error'
 
+export LC_CTYPE="utf-8"
+export PATH="/usr/local/sbin:$PATH"
