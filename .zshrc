@@ -203,3 +203,4 @@ alias gdc='git diff --cached'
 alias gs='git status'
 alias gb='git branch'
 
+export LC_ALL=en_US.UTF-8

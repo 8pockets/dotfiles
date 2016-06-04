@@ -128,6 +128,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 " ステータスライン・タブライン
 Plug 'itchyny/lightline.vim'
 
+" golang  plugin
+Plug 'fatih/vim-go'
+
 call plug#end()
 
 " filetype設定
@@ -195,6 +198,13 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
+
+" vim-go plugin Setting
+" https://github.com/fatih/vim-go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+
 
 "
 "
@@ -365,8 +375,8 @@ cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 
 set laststatus=2
-set rtp+=~/powerline/powerline/bindings/vim
-let g:Powerline_symbols = 'fancy'
+"set rtp+=~/powerline/powerline/bindings/vim
+"let g:Powerline_symbols = 'fancy'
 set noshowmode
 
 " ctag設定

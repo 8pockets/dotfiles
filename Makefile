@@ -8,6 +8,9 @@ install:
 		ln -snf ~/dotfiles/.ctags ~/.ctags
 		ln -snf ~/dotfiles/.tmux.conf ~/.tmux.conf
 		ln -snf ~/dotfiles/.vim/ ~/.vim/
+		git clone https://github.com/powerline/powerline.git ~/
+		mkdir ~/powerline/
+		ln -snf ~/dotfiles/powerline ~/
 		mkdir -p ~/.vim/autoload/
 		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
