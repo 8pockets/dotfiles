@@ -204,4 +204,7 @@ alias gs='git status'
 alias gb='git branch'
 
 export LC_CTYPE="utf-8"
-export PATH="/usr/local/sbin:$PATH"
+export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/go/bin:/usr/local/sbin:/usr/sbin:/sbin
+
+export GOPATH=$HOME/go
+

@@ -26,16 +26,17 @@ set showmode                     " 現在のモードを表示
 set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
 set modelines=0                  " モードラインは無効
 set history=10000                " コマンド・検索パターンの履歴
+set synmaxcol=200                " ハイライトする文字数を制限する
 set notitle                      " vimを使ってくれてありがとう
 let &titleold=getcwd()           " vimを使ってくれてありがとう
 
 "ターミナルでマウスを使用できるようにする
 set mouse=a
 set guioptions+=a
-set ttymouse=xterm2
+" set ttymouse=xterm2
 
 "ヤンクした文字は、システムのクリップボードに入れる"
-set clipboard=unnamed,autoselect
+" set clipboard=unnamed,autoselect
 "挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
 imap <C-p>  <ESC>"*pa
 
@@ -94,8 +95,9 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/neomru.vim'
 
 " NERDTree
-Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle'] }
+Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeTabsToggle'] }
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'jistr/vim-nerdtree-tabs'
 
 " NerdTree Icon
 "Plug 'ryanoasis/vim-devicons'
@@ -124,7 +126,8 @@ Plug 'shougo/neocomplete.vim'
 "Plug 'bling/vim-airline'
 
 " インデントに色を付けて見やすくする
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 
 " シンタックスチェック
 "Plug 'scrooloose/syntastic'
@@ -142,10 +145,22 @@ Plug 'stanangeloff/php.vim'
 " Screensaver
 Plug 'itchyny/screensaver.vim'
 
+" Class Outline Viewer
+Plug 'majutsushi/tagbar'
+
+" Fuzzy file, buffer, mru, tag, etc finder.
+Plug 'ctrlpvim/ctrlp.vim'
+
+" logging registers and reusing them
+Plug 'leafcage/yankround.vim'
+
+" Speed up j,k command
+"Plug 'rhysd/accelerated-jk'
+
 call plug#end()
 
 " filetype設定
-filetype plugin indent on    " required
+filetype plugin indent on " required
 filetype plugin on
 
 "
@@ -195,26 +210,26 @@ hi IndentGuidesEven ctermbg=lightgrey
 "
 "
 " いつでも<C-e>で開閉
-map <C-e> :NERDTreeToggle<CR>
+map <C-e> :NERDTreeTabsToggle<CR>
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
-call NERDTreeHighlightFile('py', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('rb', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-
+"call NERDTreeHighlightFile('py', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('rb', 'Red', 'none', 'red', '#151515')
+"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+"call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+"
 " Nerdtreeの表示幅
 let g:NERDTreeWinSize = 40
 let g:NERDTreeWinPos = "left"
@@ -225,7 +240,7 @@ autocmd VimEnter * NERDTree
 "ファイル上にカーソルを持ってくる
 autocmd VimEnter * wincmd p
 " How can I close vim if the only window left open is a NERDTree?
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " NERDTreeでファイルを開くとNerdtreeを閉じる
 "let g:NERDTreeQuitOnOpen = 1
 " Nerdtreeでファイルを削除したらデフォルトでバッファも削除
@@ -273,7 +288,7 @@ let g:NERDTreeShowBookmarks=1
 "'\.vim$'ならばfugitive.vimなどのファイル名が表示されない。
 "\ エスケープ記号
 "$ ファイル名の最後
-let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.swo$', '\.bak$', '\~$']
 "let g:NERDTreeIgnore=['\.vim$', '\.clean$']
 "let g:NERDTreeIgnore=['\.vim$', '\~$']
 "let g:NERDTreeIgnore=[]
@@ -290,6 +305,14 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
+
+"
+" vim-nerdtree-tabs
+"
+"
+
+" Vim起動時（コンソール）にThe NERD Treeを開く
+let g:nerdtree_tabs_open_on_console_startup=1
 
 "
 "
@@ -331,6 +354,14 @@ inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 "
+" Yggdroot/indentLine
+"
+"
+let g:indentLine_color_term = 239
+let g:indentLine_char = '┆'
+let g:indentLine_fileTypeExclude = ['help', 'nerdtree', 'calendar', 'thumbnail', 'tweetvim']
+
+"
 "
 " vim-go plugin Setting
 "
@@ -354,6 +385,52 @@ augroup phpSyntaxOverride
   autocmd!
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
+
+" tagbar
+nmap ,t :TagbarToggle<CR>
+let g:tagbar_left = 0
+let g:tagbar_autofocus = 1
+
+"
+"
+" ctrlp
+"http://vimawesome.com/plugin/ctrlp-vim-red
+"
+"
+"
+" Prefix: s
+nnoremap s <Nop>
+nnoremap sa :<C-u>CtrlP<Space>
+nnoremap sb :<C-u>CtrlPBuffer<CR>
+nnoremap sd :<C-u>CtrlPDir<CR>
+nnoremap sf :<C-u>CtrlP<CR>
+nnoremap sl :<C-u>CtrlPLine<CR>
+nnoremap sm :<C-u>CtrlPMRUFiles<CR>
+nnoremap sq :<C-u>CtrlPQuickfix<CR>
+nnoremap ss :<C-u>CtrlPMixed<CR>
+nnoremap st :<C-u>CtrlPTag<CR>
+
+let g:ctrlp_map = '<Nop>'
+" Guess vcs root dir
+let g:ctrlp_working_path_mode = 'ra'
+" Open new file in current window
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_extensions = ['tag', 'quickfix', 'dir', 'line', 'mixed']
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
+
+"
+" yankround
+"
+"
+"
+nnoremap <silent> sw :CtrlPYankRound<CR>
+
+"
+" accelerated-jk
+"
+" j/kによる移動を速くする
+"nmap j <Plug>(accelerated_jk_gj)
+"nmap k <Plug>(accelerated_jk_gk)
 
 "
 "
@@ -429,8 +506,8 @@ endif
 syntax on
 "colorscheme hybrid
 "colorscheme Tomorrow-Night-Bright
-colorscheme Tomorrow-Night-Eighties
-"colorscheme molokai
+"colorscheme Tomorrow-Night-Eighties
+colorscheme molokai
 set background=dark
 highlight Normal ctermbg=none
 
@@ -494,26 +571,24 @@ set ruler             " 右下に表示される行・列の番号を表示す�
 highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 match ZenkakuSpace /　/
 
-
-" カーソル行をハイライト
-set cursorline
-" カレントウィンドウにのみ罫線を引く
-augroup cch
-  autocmd! cch
-  autocmd WinLeave * set nocursorline
-  autocmd WinEnter,BufRead * set cursorline
-augroup END
-
-hi clear CursorLine
-hi CursorLine gui=underline
-highlight CursorLine ctermbg=black guibg=black
-
+" か＝ソル行をハイライトすると、長いファイルを開くと重くなるので削除
 "
+" カーソル行をハイライト
+"set cursorline
+" カレントウィンドウにのみ罫線を引く
+"augroup cch
+"  autocmd! cch
+"  autocmd WinLeave * set nocursorline
+"  autocmd WinEnter,BufRead * set cursorline
+"augroup END
+"
+"hi clear CursorLine
+"highlight CursorLine term=underline cterm=underline guibg=Grey90
+
 "
 "
 "
 "検索
-"
 "
 "
 "
@@ -531,13 +606,13 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " 検索後のハイライトをEsc２回入力でハイライト解除する。
 nnoremap <silent> <ESC><ESC> :nohlsearch<CR>
 
-set laststatus=1
+set laststatus=3
 set noshowmode
 
 " itchyny/lightline.vim設定
 " https://github.com/itchyny/lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'default',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
@@ -569,7 +644,7 @@ function! LightLineFilename()
         \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
         \  &ft == 'unite' ? unite#get_status_string() :
         \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ '' != expand('%') ? expand('%') : '[No Name]') .
         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 function! LightLineFugitive()
@@ -599,6 +674,3 @@ endfunction
 " ctag設定
 " v → Ctrl + ]で垂直分割して開く
 map v<C-]> :vsp <CR>:exec("tjump ".expand('<cword>'))<CR>
-
-
-
