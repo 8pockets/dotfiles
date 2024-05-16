@@ -1,0 +1,106 @@
+﻿Cy ! _Cylinder
+imp ! _Import
+Le ! _Length
+Epo ! _EditPtOn
+ExtC ! _ExtrudeCrv
+A ! _Arc
+ZSA '_Zoom _All _Selected
+Crv ! _Curve
+Sd ! _SetDisplayMode
+B ! _Box
+C ! _Circle
+To ! _TextObject
+Bs ! _BooleanSplit
+Pl !_Polyline
+D ! _Delete
+E ! _Ellipse
+POff ! _PointsOff
+Pro ! _Properties
+高度な表示 ! _OptionsPage _AdvancedSettings
+Make ! _Make2d
+Bu ! _BooleanUnion
+Ext ! _ExtrudeSrf
+G ! _Group
+Tr ! _Trim
+I ! _Intersect
+POn ! _PointsOn
+Po ! _PointsOn
+De ! _Detail
+Dis ! _Distance
+J ! _Join
+L ! _line
+PlugInManager ! _OptionsPage _PlugIns
+M ! _Move
+SelPolysurface '_SelPolysrf
+Pr ! _Print
+Lo ! _Loft
+O ! _Offset
+P '_Planar
+Sph ! _Sphere
+Pt ! _point
+S ! _Scale
+Ar ! _Area
+T ! _Text
+Ca ! _Cap
+ZE '_Zoom _Extents
+U _Undo
+Arr ! _Array
+Con ! _Connect
+Ble ! _BlockEdit
+Sp ! _Split
+W '_SelWindow
+M2 ! _Make2D
+X ! _Explode
+Ex ! _Extend
+Ro3 ! _Rotate3D
+Sr ! _PlanarSrf
+Gh ! _Grasshopper
+Z '_Zoom
+Py !_EditPythonScript
+Arrp ! _ArrayPolar
+Dp ! _DocumentProperties
+Sw1 ! _Sweep1
+ﾌﾟﾗｸﾞｲﾝﾏﾈｰｼﾞｬ ! _OptionsPage _PlugIns
+Pic ! _PictureFrame
+ZEA '_Zoom _All _Extents
+Sw2 ! _Sweep2
+Or '_Ortho
+Rk ! _RemoveKnot
+Sv ! _SetView
+Vo ! _Volume
+Os ! _Osnap
+Break ! _DeleteSubCrv
+Icrv ! _InterpCrv
+DisplayAttrsMgr ! _OptionsPage _AdvancedSettings
+Rec ! _Rectangle
+Ug ! _Ungroup
+AdvancedDisplay ! _OptionsPage _AdvancedSettings
+Ro ! _Rotate
+COff '_CurvatureGraphOff
+Bb ! _BackgroundBitmap
+Lay ! _Layout
+Bd ! _BooleanDifference
+Gr ! _Grid
+Co !_Copy
+ZS '_Zoom _Selected
+Blm ! _BlockManager
+Me ! _MoveEdge
+S1 ! _Scale1D
+Fi ! _fillet
+Mf ! _MoveFace
+S2 ! _Scale2D
+Cam ! _NamedView
+Cr '_SelCrossing
+ﾎﾟﾘｻｰﾌｪｽを選択 '_SelPolysrf
+Bi ! _BooleanIntersection
+Mi ! _Mirror
+Sec ! _Section
+COnG '_CurvatureGraph
+Srp ! _SrfPt
+La ! _layer
+Bl ! _Block
+Dim ! _Dim
+Pf ! _PictureFrame
+Exp ! _Export
+Ik ! _InsertKnot
+4v ! _4view
